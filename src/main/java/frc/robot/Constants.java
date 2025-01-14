@@ -18,9 +18,10 @@ public final class Constants {
   }
 
   public static class ElevatorSetpoints {
-    public static final double one = 7;
-    public static final double two = 14;
-    public static final double three = 50;
+    public static final double one = 20;
+    public static final double two = 32;
+    public static final double three = 57;
+    public static final double feeder = 21.5;
   }
 
   public static final int rightLeaderId = 20;

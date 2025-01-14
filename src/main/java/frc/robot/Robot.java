@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.elevator.Elevator;
@@ -108,22 +107,15 @@ public class Robot extends TimedRobot {
     // System.out.println("elevator motor stator amps: " + elevator.getMotor().getStatorCurrent().getValueAsDouble());
     // System.out.println("elevator motor supply amps: " + elevator.getMotor().getSupplyCurrent().getValueAsDouble());
 
-    if (leftJoystick.getRawButton(2)) {
+    if (rightJoystick.getRawButton(2)) {
       System.out.println("left joystick button 2 being held");
       intake.intake();
-    } else if (rightJoystick.getRawButton(2)) {
+    } else if (leftJoystick.getRawButton(2)) {
       System.out.println("right joystick button 2 being held");
       intake.outtake();
     } else {
       intake.stop();
     }
-
-    // if (rightJoystick.getRawButton(2)) {
-    //   System.out.println("right joystick button 2 being held");
-    //   intake.outtake();
-    // } else {
-    //   intake.stop();
-    // }
     
     if (leftJoystick.getRawButtonPressed(1)) {
       pneumatics.toggle();
@@ -138,32 +130,19 @@ public class Robot extends TimedRobot {
       elevator.raise();
     } else if (rightJoystick.getRawButton(4)) {
       elevator.lower();
-    }
-
-    // if (rightJoystick.getRawButtonPressed(5)) {
-    //   System.out.println("right joystick button 5 pressed");
-    //   elevator.setPosition(Constants.ElevatorSetpoints.one);
-    // }
-
-    // if (rightJoystick.getRawButtonPressed(3)) {
-    //   System.out.println("right joystick button 3 pressed");
-    //   elevator.setPosition(Constants.ElevatorSetpoints.two);
-    // }
+    } else if (rightJoystick.getRawButton(5)) {
+      elevator.setPosition(0);
+    } 
     
-    // if (rightJoystick.getRawButtonPressed(6)) {
-    //   System.out.println("right joystick button 6 pressed");
-    //   elevator.setPosition(Constants.ElevatorSetpoints.three);
-    // }
-
-    // if (rightJoystick.getRawButtonPressed(4)) {
-    //   System.out.println("right joystick button 4 pressed");
-    //   elevator.setPosition(0);
-    // }
-
-    // if (leftJoystick.getRawButtonPressed(1)) {
-    //   System.out.println("left joystick button 1 pressed");
-    //   pneumatics.toggle();
-    // }
+    if (rightJoystick.getRawButtonPressed(7)) {
+      elevator.setPosition(Constants.ElevatorSetpoints.one);
+    } else if (rightJoystick.getRawButtonPressed(9)) {
+      elevator.setPosition(Constants.ElevatorSetpoints.two);
+    } else if (rightJoystick.getRawButtonPressed(11)) {
+      elevator.setPosition(Constants.ElevatorSetpoints.three);
+    } else if (rightJoystick.getRawButtonPressed(6)) {
+      elevator.setPosition(Constants.ElevatorSetpoints.feeder);
+    }
   }
 
   @Override
