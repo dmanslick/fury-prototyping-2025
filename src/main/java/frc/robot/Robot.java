@@ -38,6 +38,7 @@ public class Robot extends TimedRobot {
   private final DifferentialDrive differentialDrive = new DifferentialDrive(rightLeader::set, leftLeader::set);
   private Command m_autonomousCommand;
   // private RobotContainer m_robotContainer;
+  private double maxSpeed = 1;
 
   @Override
   public void robotInit() {
@@ -98,8 +99,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     differentialDrive.arcadeDrive(
-      MathUtil.clamp(0.7, -0.7, leftJoystick.getY()), 
-      MathUtil.clamp(0.7, -0.7, -rightJoystick.getX())
+      MathUtil.clamp(maxSpeed, -maxSpeed, leftJoystick.getY()), 
+      MathUtil.clamp(maxSpeed, -maxSpeed, -rightJoystick.getX())
     );
     System.out.println("elevator position: " + elevator.getPosition());
     // System.out.println("elevator motor voltage: " + elevator.getMotor().getMotorVoltage().getValueAsDouble());
@@ -107,32 +108,45 @@ public class Robot extends TimedRobot {
     // System.out.println("elevator motor stator amps: " + elevator.getMotor().getStatorCurrent().getValueAsDouble());
     // System.out.println("elevator motor supply amps: " + elevator.getMotor().getSupplyCurrent().getValueAsDouble());
 
-    if (rightJoystick.getRawButton(2)) {
+    if (rightJoystick.getRawButton(1)) {
       System.out.println("left joystick button 2 being held");
       intake.intake();
-    } else if (leftJoystick.getRawButton(2)) {
+    } else if (leftJoystick.getRawButton(1)) {
       System.out.println("right joystick button 2 being held");
       intake.outtake();
     } else {
       intake.stop();
     }
     
-    if (leftJoystick.getRawButtonPressed(1)) {
-      pneumatics.toggle();
-    }
+    // if (leftJoystick.getRawButtonPressed(1)) {
+    //   pneumatics.toggle();
+    // }
 
     if (rightJoystick.getRawButtonPressed(8)) {
       System.out.println("right joystick button 8 pressed");
       elevator.resetRotationCount();
     }
 
-    if (rightJoystick.getRawButton(3)) {
+    if (rightJoystick.getPOV() == 0) {
       elevator.raise();
-    } else if (rightJoystick.getRawButton(4)) {
+    } else if (rightJoystick.getPOV() == 180) {
       elevator.lower();
-    } else if (rightJoystick.getRawButton(5)) {
+    }
+
+    if (leftJoystick.getRawButtonPressed(4)) {
+      pneumatics.toggle();
+    } else if (leftJoystick.getRawButton(8)) {
       elevator.setPosition(0);
-    } 
+    }
+
+
+    // if (rightJoystick.getRawButton(3)) {
+    //   elevator.raise();
+    // } else if (rightJoystick.getRawButton(4)) {
+    //   elevator.lower();
+    // } else if (rightJoystick.getRawButton(5)) {
+    //   elevator.setPosition(0);
+    // } 
     
     if (rightJoystick.getRawButtonPressed(7)) {
       elevator.setPosition(Constants.ElevatorSetpoints.one);

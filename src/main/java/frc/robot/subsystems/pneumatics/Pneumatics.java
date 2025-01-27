@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class Pneumatics {
     // private final PneumaticsControlModule pcm = new PneumaticsControlModule(0);
-    private final Solenoid piston = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+    private final Solenoid piston = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
 
     public void toggle() {
         System.out.println("toggling piston");

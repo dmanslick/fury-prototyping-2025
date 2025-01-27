@@ -11,7 +11,7 @@ public class Intake {
     // private double speed = 0.375;
     // private DutyCycleOut dutyCycleOut = new DutyCycleOut(0);
     private VoltageOut intakeVolts = new VoltageOut(4.5);
-    private VoltageOut outtakeVolts = new VoltageOut(-4.5);
+    private VoltageOut outtakeVolts = new VoltageOut(-2.25);
 
     public Intake() {
         // dutyCycleOut.EnableFOC = true;

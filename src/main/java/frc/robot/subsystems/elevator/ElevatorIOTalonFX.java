@@ -26,8 +26,8 @@ public class ElevatorIOTalonFX {
   private double kP = 1.75;
   private double kI = 0;
   private double kD = 0;
-  private double cruiseVelocity = 15;
-  private double acceleration = 20;
+  private double cruiseVelocity = 30;
+  private double acceleration = 60;
   private double jerk = 200;
   private TalonFXConfiguration talonFXConfig = new TalonFXConfiguration();
   private Slot0Configs slot0Configs = talonFXConfig.Slot0;
